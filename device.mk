@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2022 The OrangeFox Recovery Project
+# Copyright (C) 2020 The TwrpBuilder Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,37 +14,32 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/xiaomi/lmi
 
-# API
+
+# Configure base.mk
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+
+# Configure core_64_bit_only.mk
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
+
+# Configure twrp
+$(call inherit-product, vendor/twrp/config/common.mk)
+
+DEVICE_PATH := device/xiaomi/lmi
+
+PRODUCT_PACKAGES += \
+    bootctrl.xiaomi_sm8250.recovery
+
+# SHIPPING API
 PRODUCT_SHIPPING_API_LEVEL := 29
+# VNDK API
+PRODUCT_TARGET_VNDK_VERSION := 31
 
-# Dynamic Partitions
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(DEVICE_PATH)
+
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-# Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
-
-# Soong Namespaces
-PRODUCT_SOONG_NAMESPACES += \
-	vendor/qcom/opensource/commonsys-intf/display
-
-# Fastbootd
-PRODUCT_PACKAGES += \
-	android.hardware.fastboot@1.0-impl-mock
-
-# QCOM Decryption
-PRODUCT_PACKAGES += \
-	qcom_decrypt \
-	qcom_decrypt_fbe
-
-# Additional Libraries
-TARGET_RECOVERY_DEVICE_MODULES += \
-	libion \
-	vendor.display.config@1.0 \
-	vendor.display.config@2.0
-
-RECOVERY_LIBRARY_SOURCE_FILES += \
-	$(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
-	$(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@1.0.so \
-	$(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@2.0.so
+# PRODUCT_RELEASE_NAME ro.twrp.device.name
+PRODUCT_PROPERTY_OVERRIDES += ro.twrp.device.name=lmi
