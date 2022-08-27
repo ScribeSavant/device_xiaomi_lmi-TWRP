@@ -46,12 +46,12 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export OF_SCREEN_H="2400"
 	export OF_STATUS_H="105"
 	export OF_STATUS_INDENT_LEFT="48"
-	export OF_STATUS_INDENT_RIGHT="245"
+	export OF_STATUS_INDENT_RIGHT="48"
 	export OF_ALLOW_DISABLE_NAVBAR="0"
 
 	export OF_USE_MAGISKBOOT=1
 	export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
-	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk.zip
+	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v25.2.zip
 	export OF_DONT_PATCH_ENCRYPTED_DEVICE=1
 	export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
 	export OF_NO_MIUI_PATCH_WARNING=1
@@ -63,9 +63,9 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export OF_OTA_BACKUP_STOCK_BOOT_IMAGE=1
     
 	# R11.1 Setings
-	export FOX_BUILD_TYPE="Alpha"
+	export FOX_BUILD_TYPE="Beta"
 	export OF_MAINTAINER="SquirrelPython"
-	export FOX_VERSION="R11.1_2"
+	export FOX_VERSION="R11.1_3"
     
 	export FOX_ENABLE_APP_MANAGER=1
 	export FOX_USE_BASH_SHELL=1
